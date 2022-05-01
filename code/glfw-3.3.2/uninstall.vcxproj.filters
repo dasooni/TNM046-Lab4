@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Dasmit\Desktop\tnm046-labs-master\CMakeFiles\584e6ce10feeefd9f5da3fb1e53d2dd6\uninstall.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Dasmit\Desktop\tnm046-labs-master\glfw-3.3.2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Dasmit\Desktop\tnm046-labs-master\glfw-3.3.2\CMakeFiles\uninstall" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E39A8A2E-22EB-358C-AAEF-28E50DC9E7E5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
