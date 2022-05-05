@@ -509,7 +509,7 @@ int main(int argc, char* argv[]) {
 	// Do not wait for screen refresh between frames
     glfwSwapInterval(0);  
     // Enable back face culling
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     //Shaders
     myShader.createShader("vertex.glsl", "fragment.glsl");
@@ -545,7 +545,7 @@ int main(int argc, char* argv[]) {
         time = static_cast<float>(glfwGetTime());  // Number of seconds since the program was started
         
 		glUseProgram(myShader.id());
-        glUniform1f(locationTime, time);// Copy the value to the shader program
+       
 
 		//auto composition = mat4identity();
 		auto R = mat4identity();
@@ -555,26 +555,31 @@ int main(int argc, char* argv[]) {
 		
 		auto S = mat4scale(0.5);
         auto V = mat4rotx(M_PI / 10);
-        auto T = mat4translate(0.0, 0.0, -3.0);
+        auto T = mat4translate(0.0, 0.0, 3.0);
 		
 
-        auto orbit = mat4roty(time * M_PI / 8);
-        auto spin = mat4roty(time * M_PI / 2);
-        P = mat4perspective(M_PI / 4, 1, 0.1, 100.0);
+        auto orbit = mat4roty( time * M_PI / 8); //R1
+		auto spin = mat4rotx( time * M_PI / 2); // R2
+
+        P = mat4perspective( M_PI / 2, 1, 0.1, 100.0);
 		
 		//composition = mat4mult(V, orbit);
 		//composition = mat4mult(composition, T);
 		//composition = mat4mult(composition, spin);
-        spin = mat4mult(R, R);
-        T = mat4mult(V, MV);
-		MV = mat4mult(orbit, MV);
+  //      R = mat4mult(spin, R);
+  //      MV = mat4mult(V, orbit);
+  //      MV = mat4mult(MV, T);
+		//MV = mat4mult(MV, spin);
+        MV = spin;
 		
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);  // rendering as lines or filled
-		glUniformMatrix4fv(locationMV, 1, GL_FALSE, MV.data()); // Copy the value to the shader program
-        glUniformMatrix4fv(locationR, 1, GL_FALSE, R.data()); // Copy the value to the shader program
-		glUniformMatrix4fv(locationP, 1, GL_FALSE, P.data()); // Copy the value to the shader program
-
-        myShape.render();
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  // rendering as lines or filled
+		
+        glUniformMatrix4fv(locationR, 1, GL_FALSE, R.data());
+        glUniformMatrix4fv(locationMV, 1, GL_FALSE, MV.data()); 
+		glUniformMatrix4fv(locationP, 1, GL_FALSE, P.data()); 
+        glUniform1f(locationTime, time); 
+        
+		myShape.render();
 		
 		// Draw the triangles
 		
